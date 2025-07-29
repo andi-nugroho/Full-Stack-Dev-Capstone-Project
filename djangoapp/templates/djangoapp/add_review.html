@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Review</title>
+</head>
+<body>
+    <h1>Add a review for {{ dealer_name }}</h1>
+
+    <form action="{% url 'djangoapp:add_review' dealer_id %}" method="post">
+        {% csrf_token %}
+        <label for="name">Your Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="review">Your Review:</label><br>
+        <textarea id="review" name="review" rows="4" cols="50" required></textarea><br><br>
+
+        <input type="checkbox" id="purchase" name="purchase">
+        <label for="purchase">Have you purchased a car from this dealer?</label><br><br>
+
+        <label for="purchase_date">Purchase Date:</label><br>
+        <input type="date" id="purchase_date" name="purchase_date"><br><br>
+
+        <input type="submit" value="Submit Review">
+    </form>
+</body>
+</html>

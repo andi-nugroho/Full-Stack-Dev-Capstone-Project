@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dealerships</title>
+</head>
+<body>
+
+    <div>
+        {% if user.is_authenticated %}
+            <p>
+                Selamat datang, <b>{{ user.username }}</b>!
+                <a href="{% url 'djangoapp:logout' %}">Logout</a>
+            </p>
+        {% else %}
+            <p>
+                <a href="{% url 'djangoapp:login' %}">Login</a> |
+                <a href="{% url 'djangoapp:register' %}">Sign Up</a>
+            </p>
+        {% endif %}
+    </div>
+
+    <hr>
+
+    <h1>Daftar Dealer</h1>
+
+    <form action="{% url 'djangoapp:index' %}" method="get">
+        <label for="state">Filter by State:</label>
+        <select name="state" id="state">
+            <option value="">All States</option>
+            {% for state in all_states %}
+                <option value="{{ state }}">{{ state }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+    <br>
+
+    <ul>
+        {% for dealer in dealerships %}
+            <li>
+                <a href="{% url 'djangoapp:dealer_details' dealer.id %}">{{ dealer.name }}</a>
+                - {{ dealer.city }}, {{ dealer.state }}
+            </li>
+        {% empty %}
+            <li>Tidak ada dealer yang ditemukan.</li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>

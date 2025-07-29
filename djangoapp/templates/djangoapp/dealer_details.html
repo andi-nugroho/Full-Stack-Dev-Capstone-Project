@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dealer Details</title>
+</head>
+<body>
+
+    {% if dealer %}
+        <h1>Detail untuk: {{ dealer.name }}</h1>
+        <p>Kota: {{ dealer.city }}, {{ dealer.state }}</p>
+        <p>Alamat: {{ dealer.address }}, {{ dealer.zip }}</p>
+    {% else %}
+        <h1>Dealer tidak ditemukan.</h1>
+    {% endif %}
+
+    <hr>
+
+    <h2>Reviews</h2>
+    {% if reviews %}
+        <ul>
+            {% for review in reviews %}
+                <li>
+                    <strong>{{ review.name }}:</strong> "{{ review.review }}"
+                    <p><small>Pembelian: {{ review.purchase }} | Tanggal: {{ review.purchase_date|default:"N/A" }}</small></p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Belum ada review untuk dealer ini.</p>
+    {% endif %}
+
+    <hr>
+
+    {% if user.is_authenticated %}
+        <a href="{% url 'djangoapp:add_review' dealer.id %}">Add a review</a>
+    {% endif %}
+
+    <br><br>
+    <a href="{% url 'djangoapp:index' %}">Kembali ke Daftar Dealer</a>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+</head>
+<body>
+    <h1>Halaman Registrasi</h1>
+    <p>Silakan buat akun baru.</p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Sign Up</button>
+    </form>
+
+    <hr>
+    <p>Sudah punya akun? <a href="{% url 'djangoapp:login' %}">Login di sini</a>.</p>
+</body>
+</html>
